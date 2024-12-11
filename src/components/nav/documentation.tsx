@@ -1,12 +1,9 @@
 "use client"
 
-import { MoreHorizontal, Folder, Forward, Trash2 } from 'lucide-react'
+import { MoreHorizontal } from 'lucide-react'
 
 import {
   DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import {

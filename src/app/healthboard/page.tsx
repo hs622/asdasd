@@ -1,6 +1,5 @@
 "use client";
 
-import NavDocumentation from "@/components/nav/documentation";
 import NavMain from "@/components/nav/main";
 import AuthUser from "@/components/nav/user"; 
 import {
@@ -14,12 +13,9 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import {
-  AudioWaveform,
   BookOpen,
   Bot,
-  Command,
   Frame,
-  GalleryVerticalEnd,
   PieChart,
   Settings2,
   SquareActivity,
@@ -35,7 +31,6 @@ const data = {
   teams: [
     {
       name: "Healthcare Inc",
-      logo: GalleryVerticalEnd,
       plan: "AI Assistance",
     },
   ],
@@ -86,7 +81,6 @@ const page = () => {
     <SidebarProvider>
       <Sidebar collapsible="icon">
         <SidebarHeader className="flex flex-row">
-            {/* <TeamSwitcher teams={data.teams} /> */}
             <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
               <SquareActivity className="size-4" />
             </div>
@@ -104,7 +98,6 @@ const page = () => {
           </SidebarGroup>
           <SidebarGroup className="group-data-[collapsible=icon]:hidden">
             <SidebarGroupLabel>Documentation</SidebarGroupLabel>
-            {/* <NavDocumentation documentation={data.documentation} /> */}
           </SidebarGroup>
         </SidebarContent>
         <SidebarFooter>
