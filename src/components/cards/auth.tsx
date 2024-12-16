@@ -9,15 +9,15 @@ import {
   CardTitle,
 } from "../ui/card";
 import LoginForm from "../forms/login";
-// import { useSearchParams } from "next/navigation";
-// import RegisterForm from "../forms/register";
+import { useSearchParams } from "next/navigation";
+import RegisterForm from "../forms/register";
 
 const Auth = () => {
-  // const params = useSearchParams();
+  const params = useSearchParams();
 
   return (
     <div>
-      {/* { params.has("form") && params.get("form") == "signup" ? (
+      { params.has("form") && params.get("form") == "signup" ? (
         <Card className="mx-auto max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">Register</CardTitle>
@@ -29,7 +29,7 @@ const Auth = () => {
           <RegisterForm />
         </CardContent>
       </Card>
-      ) : ( */}
+      ) : (
         <Card className="mx-auto max-w-sm">
           <CardHeader>
             <CardTitle className="text-2xl">Login</CardTitle>
@@ -41,7 +41,7 @@ const Auth = () => {
             <LoginForm />
           </CardContent>
         </Card>
-      {/* )} */}
+      )}
     </div>
   );
 };
