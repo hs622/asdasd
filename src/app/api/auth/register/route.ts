@@ -10,7 +10,7 @@ type newUserCreateInputs = {
   email: string;
   password: string;
   role: string;
-  emailVerified: string | null;
+  emailVerified: boolean;
   status: boolean | null;
 };
 
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
         email: result.data.email!,
         password: Hash,
         role: DEFAULT_ROLE,
-        emailVerified: null,
+        emailVerified: false,
         status: null,
       };
 

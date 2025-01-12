@@ -16,12 +16,27 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async signIn({ account, profile }) {
-      console.log({account, profile});
+      // if (account?.provider === "google") {
+      //   return profile.email_verified
+      // }
+      console.log("SignIn: ");
+      console.log({account}, {profile});
+
       return true;
-    }
+    },
+    async jwt({ token }) {
+      // Ensure correct token structure
+      return token;
+    },
+    async session({ session, token }) {      
+      session.user.name = token.name as string;
+      return session;
+    },
   },  
-  secret: process.env.SECRET_KEY,
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: '/sign-in',
+    newUser: '/sign-up',
+    signOut: '/',
   }
 } satisfies NextAuthOptions;
