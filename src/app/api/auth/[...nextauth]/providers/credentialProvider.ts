@@ -13,14 +13,19 @@ export default CredentialProvider({
     },
   },
   async authorize(credentials) {
+    console.log("CredentialProvider: ",{credentials});
     const user = {
       id: "66715f30265a39c6b119a487",
-      name: "hussain ali",
+      firstName: "hussain",
+      lastName: "Ali",
+      image: null,
       email: "hussain.ali@gmail.com",
       password: "admin123",
-      token: "xI8wbX3vHAEMn+KkdF1a7A==",
-      phone: "+923332222222",
+      emailVerified: false,
       role: "admin"
+
+      // token: "xI8wbX3vHAEMn+KkdF1a7A==",
+      // phone: "+923332222222",
     };
     if (
       credentials?.email === user.email &&
