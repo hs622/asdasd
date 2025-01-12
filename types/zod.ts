@@ -51,10 +51,16 @@ export const Topic = z.object({
   status: z.boolean(),
 });
 
+export const RoleSchema = z.object({
+  
+});
+
+
 export type TLoginSchema = z.infer<typeof LoginSchema>;
 export type TRegisterSchema = z.infer<typeof RegisterSchema>;
 export type TSearchForSubjectSchema = z.infer<typeof SearchForSubjectSchema>;
 
+export type TRoleSchema = z.infer<typeof RoleSchema>;
 
 export type TSubjectSchema = z.infer<typeof SubjectSchema>;
 export type TTopicSchema = z.infer<typeof TopicSchema>;

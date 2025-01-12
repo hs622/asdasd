@@ -8,16 +8,20 @@ declare module "next-auth" {
       name: string;
       email: string;
       phone: string;
-      role: string; 
+      role: string;
     };
   }
   interface User {
-    id: string;
-    token: string;
-    name: string;
+    id: string?;
+    firstName: string;
+    lastName: string?;
     email: string;
-    phone: string;
-    role: string; 
+    emailVerified: boolean,
+    image: string?,
+    role: string?;
+    
+    // token: string;
+    // phone: string?;
   }
 }
 
