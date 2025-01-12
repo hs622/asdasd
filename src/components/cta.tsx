@@ -11,7 +11,7 @@ const CTA = () => {
           from a life-changing journey
         </h2>
         <Button size="lg" variant="secondary">
-          Try Docus for Free
+          Try Healthdesk for Free
         </Button>
         <p className="text-sm text-gray-400">
           ✓ 100% health-oriented journey ✓ Virtual health assistant powered by
