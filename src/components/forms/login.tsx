@@ -3,15 +3,17 @@ import { Label } from "../ui/label";
 import Link from "next/link";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import GoogleBotton from "../bottons/google";
+import GoogleButton from "../buttons/google";
 
 const LoginForm = () => {
+
+
   return (
     <div>
       <div className="grid gap-4">
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" required />
+          <Input id="email" type="email" placeholder="m@example.com" />
         </div>
         <div className="grid gap-2">
           <div className="flex items-center">
@@ -22,10 +24,10 @@ const LoginForm = () => {
           </div>
           <Input id="password" type="password" required />
         </div>
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" >
           Login
         </Button>
-        <GoogleBotton>Sign In with Google</GoogleBotton>
+        <GoogleButton>Contiune with Google</GoogleButton>
       </div>
       <div className="mt-4 text-center text-sm">
         Don&apos;t have an account?{" "}
