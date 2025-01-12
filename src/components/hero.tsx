@@ -36,7 +36,7 @@ const Hero = () => {
               <span className="text-sm text-muted-foreground">Excellent</span>
             </div> */}
           </div>
-          <div className="flex gap-4 items-center pt-4">
+          {/* <div className="flex gap-4 items-center pt-4">
             <Image
               src="/placeholder.svg"
               alt="HIPAA Compliant"
@@ -51,11 +51,11 @@ const Hero = () => {
               height={40}
               className="h-12 w-auto"
             />
-          </div>
+          </div> */}
         </div>
         <div className="relative">
           <Image
-            src="/placeholder.svg"
+            src="/banner.jpg"
             alt="Health Assistant Demo"
             width={600}
             height={500}
