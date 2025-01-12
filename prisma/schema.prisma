@@ -48,16 +48,16 @@ model User {
   firstName     String    @db.String
   lastName      String?   @db.String
   email         String?   @unique
-  emailVerified DateTime?
+  emailVerified Boolean   @default(false)
   image         String?
   accounts      Account[]
   sessions      Session[]
 
-  password  String?   @db.String
-  role      String    @db.String
+  password  String?  @db.String
+  role      String   @db.String
   status    Boolean?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("users")
 }
@@ -77,7 +77,6 @@ model VerificationToken {
 //   user   User      @relation(fields: [userId], references: [id])
 //   userId String    @db.ObjectId
 //   dob    DateTime? @db.Date
-  
 
 //   @@map("profiles")
 // }
