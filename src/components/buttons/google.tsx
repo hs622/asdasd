@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "../ui/button";
 import { signIn } from "next-auth/react";
 
-const GoogleBotton = ({ children }: Readonly<{ children: React.ReactNode }>) => {
+const GoogleButton = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <Button
       variant="outline"
@@ -14,4 +14,4 @@ const GoogleBotton = ({ children }: Readonly<{ children: React.ReactNode }>) => 
   );
 };
 
-export default GoogleBotton;
+export default GoogleButton;
