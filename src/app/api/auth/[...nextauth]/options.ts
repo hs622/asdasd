@@ -7,7 +7,6 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { Adapter } from "next-auth/adapters";
 
 const prisma = new PrismaClient();
-
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
   providers: [
@@ -29,10 +28,11 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {      
-      session.user.name = token.name as string;
+      // session.user.name = token.name as string;
       return session;
     },
   },  
+  session: { strategy: "jwt" },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: '/sign-in',

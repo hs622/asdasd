@@ -1,7 +1,9 @@
+import { prisma } from "@/prisma";
 import CredentialProvider from "next-auth/providers/credentials";
+import bcrypt from "bcryptjs";
 
 export default CredentialProvider({
-  name: "Credentials",
+  name: "credentials",
   credentials: {
     email: {
       label: "Email",
@@ -13,25 +15,28 @@ export default CredentialProvider({
     },
   },
   async authorize(credentials) {
-    console.log("CredentialProvider: ",{credentials});
-    const user = {
-      id: "66715f30265a39c6b119a487",
-      firstName: "hussain",
-      lastName: "Ali",
-      image: null,
-      email: "hussain.ali@gmail.com",
-      password: "admin123",
-      emailVerified: false,
-      role: "admin"
+    const email: string | undefined = credentials?.email;
+    const password: string | undefined = credentials?.password;
 
-      // token: "xI8wbX3vHAEMn+KkdF1a7A==",
-      // phone: "+923332222222",
-    };
-    if (
-      credentials?.email === user.email &&
-      credentials.password === user.password
-    ) {
-      return user;
-    } else return null;
+    const user = await prisma.user.findUnique({
+      where: { email: email },
+    });
+
+    if (user) {
+      console.log({ user }); 
+      if (await bcrypt.compare(password!, user.password!)) {
+        return {
+          id: user.id,
+          email: user.email,
+          role: user.role,
+          image: null,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          emailVerified: user.emailVerified,
+        };
+      }
+    }
+
+    return null;
   },
 });

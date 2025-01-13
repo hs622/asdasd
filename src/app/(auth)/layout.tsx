@@ -14,8 +14,8 @@ export default async function AuthLayout({
   children: React.ReactNode;
 }>) {
   const response = await getServerSession(authOptions);
-  if(response != null)
-    permanentRedirect('/healthboard');
+  // if(response != null)
+  //   permanentRedirect('/healthboard');
 
   return (
     <div className="flex justify-center items-center min-h-screen">
