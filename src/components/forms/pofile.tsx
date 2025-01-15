@@ -59,7 +59,7 @@ const ProfileForm = () => {
         </div>
         <div>
           <Label htmlFor="dateOfBirth">Date of Birth</Label>
-          <Input id="dateOfBirth" type="number" {...register("dob")} />
+          <Input id="dateOfBirth" type="number" {...register("dateOfBirth")} />
         </div>
         <div>
           <Label htmlFor="phoneNumber">Phone Number</Label>
