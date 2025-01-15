@@ -52,7 +52,25 @@ export const Topic = z.object({
 });
 
 export const RoleSchema = z.object({
-  
+  auth: z.string(),
+  role: z.string()
+});
+
+export const ProfileSchema = z.object({
+  firstName: z.string().min(1, "First name is required"),
+  lastName: z.string().min(1, "Last name is required"),
+  gender: z.enum(["Male", "Female", "Non-binary", "Other", "Prefer not to say"]),
+  dateOfBirth: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date of Birth must be in YYYY-MM-DD format"),
+  phoneNumber: z.string().min(10, "Phone number must be at least 10 characters"),
+  email: z.string().email("Invalid email address"),
+  address: z.string(),
+  // address: z.object({
+  //   streetAddress: z.string().min(1, "Street address is required"),
+  //   city: z.string().min(1, "City is required"),
+  //   state: z.string().min(1, "State is required"),
+  //   postalCode: z.string().min(4, "Postal code is required"),
+  //   country: z.string().min(1, "Country is required"),
+  // }),
 });
 
 
@@ -61,8 +79,10 @@ export type TRegisterSchema = z.infer<typeof RegisterSchema>;
 export type TSearchForSubjectSchema = z.infer<typeof SearchForSubjectSchema>;
 
 export type TRoleSchema = z.infer<typeof RoleSchema>;
-
 export type TSubjectSchema = z.infer<typeof SubjectSchema>;
 export type TTopicSchema = z.infer<typeof TopicSchema>;
 export type TSubject = z.infer<typeof Subject>; 
 export type TTopic = z.infer<typeof Topic>; 
+
+
+export type TProfileSchema = z.infer<typeof ProfileSchema>;
