@@ -27,6 +27,8 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
+import Logout from "../buttons/logout";
+import Link from "next/link";
 
 interface User {
   name: string;
@@ -91,36 +93,44 @@ const AuthUser = ({ user }: AuthUserProps) => {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
-              </DropdownMenuItem>
+              <Link href="/pricing" className="cursor-pointer">
+                <DropdownMenuItem>
+                  <Sparkles />
+                  Upgrade to Pro
+                </DropdownMenuItem>
+              </Link>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <BadgeCheck />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Bell />
-                Notifications
-              </DropdownMenuItem>
+              <Link href={"/healthboard/profile"}>
+                <DropdownMenuItem>
+                  <BadgeCheck />
+                  Account
+                </DropdownMenuItem>
+              </Link>
+              <Link href={"/healthboard/billing"}>
+                <DropdownMenuItem>
+                  <CreditCard />
+                  Billing
+                </DropdownMenuItem>
+              </Link>
+              <Link
+                href={"/healthboard/notifications"}
+                className="cursor-pointer"
+              >
+                <DropdownMenuItem>
+                  <Bell />
+                  Notifications
+                </DropdownMenuItem>
+              </Link>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Button
+              <LogOut />
+              <Logout
                 variant={"link"}
-                className="no-underline p-0"
-                onClick={() => router.push("/dashboard")}
-              >
-                <LogOut />
-                Log out
-              </Button>
+                className="hover:no-underline p-0"
+              ></Logout>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

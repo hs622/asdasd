@@ -7,7 +7,6 @@ export default GoogleProvider({
   clientSecret: process.env.GOOGLE_SECRET as string,
   
   profile(profile: GoogleProfile) {
-    console.log("Google Provider: ", {profile});
     return {
       id: profile.sub,
       firstName: profile.given_name,

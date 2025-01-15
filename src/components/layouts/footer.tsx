@@ -8,13 +8,13 @@ const Footer = () => {
       <div className="container">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           <div className="col-span-2">
-            <Image
+            {/* <Image
               src="/placeholder.svg"
-              alt="Docus Logo"
+              alt="healthDesk Logo"
               width={100}
               height={40}
               className="h-8 w-auto mb-4"
-            />
+            /> */}
             <p className="text-sm text-muted-foreground">
               Elevating health through the power of AI. Your trusted companion
               for personalized healthcare management and insights.
@@ -95,7 +95,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div>
+          {/* <div>
             <h3 className="font-semibold mb-4">Product</h3>
             <ul className="space-y-2">
               <li>
@@ -131,7 +131,7 @@ const Footer = () => {
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
           <div>
             <h3 className="font-semibold mb-4">Resources</h3>
             <ul className="space-y-2">

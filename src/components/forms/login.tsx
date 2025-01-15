@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Label } from "../ui/label";
 import Link from "next/link";
 import { Input } from "../ui/input";
@@ -20,9 +20,8 @@ const LoginForm = () => {
 
   const {
     register,
-    setError,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<TLoginSchema>({
     resolver: zodResolver(LoginSchema),
   });
@@ -35,10 +34,9 @@ const LoginForm = () => {
       password,
       redirect: false,
     });
- 
-    if (response!.ok) {
-      console.log({response});
-    } else {
+
+    if (response!.ok) router.push("/");
+    else {
       toast({
         title: "Invalid Credentials",
         variant: "destructive",

@@ -22,14 +22,13 @@ export default CredentialProvider({
       where: { email: email },
     });
 
-    if (user) {
-      console.log({ user }); 
+    if (user) { 
       if (await bcrypt.compare(password!, user.password!)) {
         return {
           id: user.id,
-          email: user.email,
+          email: user.email as string,
           role: user.role,
-          image: null,
+          image: user.image,
           firstName: user.firstName,
           lastName: user.lastName,
           emailVerified: user.emailVerified,
