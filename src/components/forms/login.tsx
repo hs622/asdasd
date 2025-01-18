@@ -35,8 +35,14 @@ const LoginForm = () => {
       redirect: false,
     });
 
-    if (response!.ok) router.push("/");
-    else {
+    
+    if (response!.ok)  {
+      const user = await fetch("/api/auth/session").then((res) => res.json());
+      console.log("user session: ");
+      console.log({user});
+      
+      // router.push("/");
+    } else {
       toast({
         title: "Invalid Credentials",
         variant: "destructive",

@@ -12,11 +12,11 @@ import { RegisterSchema, TRegisterSchema } from "../../../types/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoadingButton } from "../buttons/loading";
 
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
-  const [show] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); 
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const {
@@ -30,12 +30,12 @@ const RegisterForm = () => {
 
   const onSubmit = async (data: TRegisterSchema) => {
     setIsLoading(true);
-     
+
     // using fetch API
-    const response = await fetch('/api/auth/register', {
-      method: 'POST',
+    const response = await fetch("/api/auth/register", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: data.email,
@@ -46,10 +46,10 @@ const RegisterForm = () => {
     });
 
     const result = await response.json();
-    if(response.ok) {
+    if (response.ok) {
       setIsLoading(false);
-      console.log(result)  
- 
+      console.log(result);
+
       router.push(result.redirect);
     }
 
@@ -134,12 +134,18 @@ const RegisterForm = () => {
           )}
         </div>
         <div className="grid gap-1">
-          <Label htmlFor="password" className="text-sm">
-            Password
+          <Label htmlFor="password" className="flex justify-between text-sm">
+            Password{" "}
+            <span
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="cursor-pointer"
+            >
+              {showPassword ? "Hide" : "Show"}
+            </span>
           </Label>
           <Input
             id="password"
-            type={show ? "text" : "password"}
+            type={showPassword ? "text" : "password"}
             {...register("password")}
           />
           {errors?.password && (

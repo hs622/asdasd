@@ -30,7 +30,7 @@ const ProfileForm = () => {
   });
 
   const updateProfile = (Data: any) => {};
-
+  
   return (
     <form onSubmit={handleSubmit(updateProfile)} noValidate={false}>
       <div className="space-y-4">

@@ -24,6 +24,9 @@ export default CredentialProvider({
 
     if (user) { 
       if (await bcrypt.compare(password!, user.password!)) {
+        console.log("authorize: ");
+        console.log(user);
+        
         return {
           id: user.id,
           email: user.email as string,

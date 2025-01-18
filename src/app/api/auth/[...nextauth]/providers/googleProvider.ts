@@ -13,7 +13,7 @@ export default GoogleProvider({
       lastName: profile.family_name ?? null,
       email: profile.email,
       image: profile.picture,
-      emailVerified: profile.email_verified,
+      emailVerified: profile.email_verified as boolean,
       role: DEFAULT_ROLE,
       status: null,
     }

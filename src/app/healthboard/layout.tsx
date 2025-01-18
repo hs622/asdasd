@@ -23,7 +23,7 @@ import NavMain from "@/components/nav/main";
 
 export const metadata: Metadata = {
   title: "Dashboard",
-  description: "",
+  description: "Dashboard page",
 };
 
 export default async function ({ children }: { children: React.ReactNode }) {

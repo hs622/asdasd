@@ -14,40 +14,24 @@ export const authOptions: NextAuthOptions = {
     credentialProvider,
   ],
   callbacks: {
-    // only check if user exists in database when user is created
-    async signIn({ account, user }) {
-      // if (account?.provider === 'credentials') {
-      //   return user.emailVerified as boolean
-      // } 
-
-      return true;
-    },
     async jwt({ token, user, account, profile }) {    
       if(account) {
         token.sub = user.id;
-        token.email = profile?.email;
+        token.email = user.email;
         token.firstName = user.firstName;
         token.lastName = user.lastName;
-        token.name = profile?.name;
-        token.picture = profile?.image;
-        token.emailVerified = user.emailVerified as boolean;
+        token.picture = user.image;
         token.role = user.role;
+        token.emailVerified = user.emailVerified as boolean;
       }
-
-      console.log("token: ");
-      console.log(token);
-      
       return token;
     },
     async session({ session, token }) {
-      console.log("Session called.");
-      // console.log({session}, {token});
-      console.log(token);
-      
       session.user.email = token.email as string;
       session.user.firstName = token.firstName as string;
       session.user.lastName = token.lastName as string;
-      // session.user.image = token.picture as string;
+      session.user.emailVerified = token.emailVerified
+      session.user.image = token.picture as string;
       
       return session;
     },

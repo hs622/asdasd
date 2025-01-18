@@ -9,7 +9,7 @@ export { default } from 'next-auth/middleware'
 
 export const config = {
   matcher: [ 
-//     '/prerequisite',
+    '/prerequisite',
 //     '/healthboard',
 //     '/healthboard/:path',
   ]
