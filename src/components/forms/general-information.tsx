@@ -15,16 +15,7 @@ import {
   GeneralInformationSchema,
   TGeneralInformationSchema,
 } from "../../../types/zod";
-
-// interface FormData {
-//   age: string;
-//   measurementSystem: "metric" | "imperial";
-//   weight: string;
-//   height: string;
-//   heightInches?: string;
-//   ethnicity: string;
-//   sex: string;
-// }
+import { toast } from "@/hooks/use-toast";
 
 export default function GeneralInformationForm() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -43,18 +34,6 @@ export default function GeneralInformationForm() {
     },
   });
 
-  // const updateFormData = (key: keyof FormData, value: string) => {
-  //   setFormData((prev) => ({ ...prev, [key]: value }));
-  // };
-
-  // const handleNext = () => {
-  //   if (currentStep < totalSteps) {
-  //     setCurrentStep((prev) => prev + 1);
-  //   } else {
-  //     console.log("Form submitted:", formData);
-  //   }
-  // };
-
   const handleNext = async () => {
     if (currentStep < totalSteps) {
       setCurrentStep((prev) => prev + 1);
@@ -64,6 +43,12 @@ export default function GeneralInformationForm() {
         method: "POST",
         body: JSON.stringify(methods.getValues()),
       });
+
+      if(response.ok) {
+        toast({
+          description: "information updated."
+        });
+      }
     }
   };
 

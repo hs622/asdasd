@@ -14,15 +14,40 @@
 
 import GeneralInformationForm from "@/components/forms/general-information";
 import { prisma } from "@/prisma";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/options";
+import { Card } from "@/components/healthboard/cards";
+import { BarChart2, ClipboardList, FileText, MessageSquare, UserRound } from "lucide-react";
+import { HealthProfile } from "@/components/healthboard/health-profile";
 
-export default function page() {
-  
+export default async function page() {
+  const session = await getServerSession(authOptions);
+  const genInfo = await prisma.generalInformation.findUnique({
+    where: { userId: session?.user.id },
+  });
 
   return (
-    <>
-      <GeneralInformationForm />
+    <div>{!genInfo ? <GeneralInformationForm /> : (
+      <div className="w-[50rem] mx-auto p-6">
+      <HealthProfile name={session?.user.firstName as string} progress={12} />
 
-    </>
+      <div className="grid gap-4 md:grid-cols-2">
+        <Card title="Chat with AI Doctor" icon={MessageSquare} />
+        <Card title="Lab Tests & Screenings" icon={FileText} />
+        <Card title="Checkup Plan" icon={ClipboardList} comingSoon />
+        <Card title="Health Reports" icon={BarChart2} comingSoon />
+      </div>
+
+      {/* <div className="mt-4">
+        <Card
+          title="Consult Top Doctors"
+          icon={UserRound}
+          description="Online Consultation with top Doctors from the US and Europe."
+        
+        />
+      </div> */}
+    </div>
+    )}</div>
     // <div className="container mx-auto p-4">
 
     //   <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

@@ -1,14 +1,19 @@
-import { Button } from "@/components/ui/button"
-import { ArrowLeft } from 'lucide-react'
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, Loader2 } from "lucide-react";
 
 interface NavigationProps {
-  currentStep: number
-  totalSteps: number
-  onBack: () => void
-  onNext: () => void
+  currentStep: number;
+  totalSteps: number;
+  onBack: () => void;
+  onNext: () => void; 
 }
 
-export default function Navigation({ currentStep, totalSteps, onBack, onNext }: NavigationProps) {
+export default function Navigation({
+  currentStep,
+  totalSteps,
+  onBack,
+  onNext, 
+}: NavigationProps) {
   return (
     <div className="mt-8 flex items-center justify-between">
       {currentStep > 1 && (
@@ -32,11 +37,10 @@ export default function Navigation({ currentStep, totalSteps, onBack, onNext }: 
         <Button
           onClick={onNext}
           className="ml-auto bg-[#22A699] hover:bg-[#1A8F88]"
-        >
+        > 
           Submit
         </Button>
-      )}
+      )} 
     </div>
-  )
+  );
 }
-

@@ -4,6 +4,7 @@ import { prisma } from "@/prisma";
 import { NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 export async function POST(request: Request) {
   const body: unknown = await request.json();  
@@ -22,7 +23,32 @@ export async function POST(request: Request) {
     });
   } else {
     const session = await getServerSession(authOptions);
-    if (session) {      
+    if (!session) {      
+      redirect("/sign-in");
+    }
+
+    const queryRes = await prisma.generalInformation.findUnique({
+      where: { userId: session?.user.id },
+    })
+
+    if(queryRes) {
+      const response = await prisma.generalInformation.update({
+        where: { userId: session?.user.id },
+        data: {
+          age: result.data.age,
+          gender: result.data.sex as string,
+          measurementSystem: result.data.measurementSystem as string,
+          ethnicity: result.data.ethnicity as string,
+          height: parseInt(result.data.height),
+          heightInches: result.data.heightInches
+            ? parseInt(result.data.heightInches!)
+            : null,
+          weight: parseInt(result.data.weight),
+        }
+      });
+
+      return NextResponse.json({  message: "Updated", data: {...response} }, { status: 202 });
+    } else {
       const response = await prisma.generalInformation.create({
         data: {
           userId: session?.user.id as string,
@@ -37,9 +63,8 @@ export async function POST(request: Request) {
           weight: parseInt(result.data.weight),
         },
       });
-
       return NextResponse.json({  message: "Success", data: {...response} }, { status: 201 });
-    }
+    }    
   }
 }
 

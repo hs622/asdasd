@@ -13,6 +13,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoadingButton } from "../buttons/loading";
 
 import { useRouter } from "next/navigation";
+import { toast } from "@/hooks/use-toast";
+import { ToastAction } from "../ui/toast";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -50,7 +52,17 @@ const RegisterForm = () => {
       setIsLoading(false);
       console.log(result);
 
-      router.push(result.redirect);
+      toast({
+        title: "Registration successful",
+        description: "You can now log in with your new account",
+        variant: "default",
+        action: (
+          <ToastAction altText="Goto schedule to undo">
+            <Link href="/sign-in">sign in</Link>
+          </ToastAction>
+        ),
+      })
+      // router.push(result.redirect);
     }
 
     // displaying server errors.
