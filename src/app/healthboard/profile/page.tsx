@@ -1,5 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
-import ProfileForm from "@/components/forms/pofile";
+import ProfileForm from "@/components/forms/profile";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 

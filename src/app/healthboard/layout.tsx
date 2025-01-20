@@ -20,6 +20,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import NavMain from "@/components/nav/main";
+import { DEFAULT_ROLE } from "../../../types/zod";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -28,9 +29,8 @@ export const metadata: Metadata = {
 
 export default async function ({ children }: { children: React.ReactNode }) {
   const session = await getServerSession(authOptions);
-  if (!session) {
-    redirect("/sign-in");
-  }
+  if (!session) redirect("/sign-in");
+  if(session.user.role == DEFAULT_ROLE) redirect("/prerequisite");
 
   return (
     <SidebarProvider>

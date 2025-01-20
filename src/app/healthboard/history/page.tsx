@@ -23,7 +23,8 @@ const history = {
 const History = () => {
   return (
     <div>
-      <div className="container mx-auto p-4">
+      History
+      {/* <div className="container mx-auto p-4">
         <h1 className="text-3xl font-bold mb-6">History</h1>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <Card>
@@ -100,7 +101,7 @@ const History = () => {
             </CardContent>
           </Card>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
