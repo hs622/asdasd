@@ -7,8 +7,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import LoginForm from "@/components/forms/login";
+// import { getServerSession } from "next-auth";
+// import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
-const Auth = () => {
+const Auth = async () => {
+  // const session = await getServerSession(authOptions);
+
   return (
     <Card>
       <CardHeader>
@@ -18,7 +22,7 @@ const Auth = () => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <LoginForm />
+        <LoginForm  />
       </CardContent>
     </Card>
   );

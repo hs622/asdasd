@@ -14,7 +14,7 @@ export const authOptions: NextAuthOptions = {
     credentialProvider,
   ],
   callbacks: {
-    async jwt({ token, user, account, profile }) {    
+    async jwt({ token, user, account, trigger, session }) {    
       if(account) {
         token.sub = user.id;
         token.email = user.email;
@@ -24,14 +24,21 @@ export const authOptions: NextAuthOptions = {
         token.role = user.role;
         token.emailVerified = user.emailVerified as boolean;
       }
+
+      if(trigger == 'update') { 
+        token.role = session.role;
+      }
+
       return token;
     },
     async session({ session, token }) {
+      session.user.id = token.sub as string;
       session.user.email = token.email as string;
       session.user.firstName = token.firstName as string;
       session.user.lastName = token.lastName as string;
       session.user.emailVerified = token.emailVerified
       session.user.image = token.picture as string;
+      session.user.role = token.role;
       
       return session;
     },
