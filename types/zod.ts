@@ -1,14 +1,14 @@
 import z from "zod";
 
-export const DEFAULT_ROLE = "UNSIGNED"
+export const DEFAULT_ROLE = "UNSIGNED";
 // export const ACCPETED_FILE_TYPE = [
-//   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", 
+//   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
 //   "application/vnd.ms-excel",
 // ];
 
 export const LoginSchema = z.object({
   email: z.string().email("Please enter your valid password."),
-  password: z.string().min(8, "Please enter your password.")
+  password: z.string().min(8, "Please enter your password."),
 });
 
 export const RegisterSchema = z.object({
@@ -53,15 +53,25 @@ export const Topic = z.object({
 
 export const RoleSchema = z.object({
   auth: z.string(),
-  role: z.string()
+  role: z.string(),
 });
 
 export const ProfileSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
-  gender: z.enum(["Male", "Female", "Non-binary", "Other", "Prefer not to say"]),
-  dateOfBirth: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date of Birth must be in YYYY-MM-DD format"),
-  phoneNumber: z.string().min(10, "Phone number must be at least 10 characters"),
+  gender: z.enum([
+    "Male",
+    "Female",
+    "Non-binary",
+    "Other",
+    "Prefer not to say",
+  ]),
+  dateOfBirth: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Date of Birth must be in YYYY-MM-DD format"),
+  phoneNumber: z
+    .string()
+    .min(10, "Phone number must be at least 10 characters"),
   email: z.string().email("Invalid email address"),
   address: z.string(),
   // address: z.object({
@@ -73,6 +83,15 @@ export const ProfileSchema = z.object({
   // }),
 });
 
+export const GeneralInformationSchema = z.object({
+  age: z.number().min(10, "Age must be great than 10.").max(122, "Age must be less than 123."),
+  measurementSystem: z.enum(["metric", "imperial"]),
+  weight: z.string().nonempty("Weight is required"),
+  height: z.string().nonempty("Height is required"),
+  heightInches: z.string().optional(),
+  ethnicity: z.string().nonempty("Ethnicity is required"),
+  sex: z.string().nonempty("Sex is required"),
+});
 
 export type TLoginSchema = z.infer<typeof LoginSchema>;
 export type TRegisterSchema = z.infer<typeof RegisterSchema>;
@@ -81,8 +100,8 @@ export type TSearchForSubjectSchema = z.infer<typeof SearchForSubjectSchema>;
 export type TRoleSchema = z.infer<typeof RoleSchema>;
 export type TSubjectSchema = z.infer<typeof SubjectSchema>;
 export type TTopicSchema = z.infer<typeof TopicSchema>;
-export type TSubject = z.infer<typeof Subject>; 
-export type TTopic = z.infer<typeof Topic>; 
-
+export type TSubject = z.infer<typeof Subject>;
+export type TTopic = z.infer<typeof Topic>;
 
 export type TProfileSchema = z.infer<typeof ProfileSchema>;
+export type TGeneralInformationSchema = z.infer<typeof GeneralInformationSchema>;
