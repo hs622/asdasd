@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import GoogleButton from "../buttons/google";
-import { LoginSchema, TLoginSchema } from "../../../types/zod";
+import { DEFAULT_ROLE, LoginSchema, TLoginSchema } from "../../../types/zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -35,13 +35,13 @@ const LoginForm = () => {
       redirect: false,
     });
 
-    
-    if (response!.ok)  {
-      const user = await fetch("/api/auth/session").then((res) => res.json());
-      console.log("user session: ");
-      console.log({user});
+    if (response!.ok) {
+      const session = await fetch('api/auth/session');
+      const sessionParse = await session.json();
       
-      // router.push("/");
+      if(sessionParse.user.role == DEFAULT_ROLE) router.push("/prerequisite");
+      else router.push("/healthboard");
+      
     } else {
       toast({
         title: "Invalid Credentials",

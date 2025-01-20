@@ -1,13 +1,18 @@
-import Image from 'next/image'
-import { Lock } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import Image from "next/image";
+import { Loader2, Lock } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface WelcomeStepProps {
-  onStart: () => void
-  onPrevious: () => void
+  onStart: () => void;
+  onPrevious: () => void;
+  isSubmit: boolean;
 }
 
-export function WelcomeStep({ onStart, onPrevious }: WelcomeStepProps) {
+export function WelcomeStep({
+  onStart,
+  onPrevious,
+  isSubmit,
+}: WelcomeStepProps) {
   return (
     <div className="space-y-6 text-center">
       <div className="space-y-2">
@@ -23,18 +28,35 @@ export function WelcomeStep({ onStart, onPrevious }: WelcomeStepProps) {
         />
       </div>
       <p className="text-center max-w-md mx-auto">
-        We&apos;re going to ask you some health related questions to personalize your health
-        journey for your unique needs.
+        We&apos;re going to ask you some health related questions to personalize
+        your health journey for your unique needs.
       </p>
       <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
         <Lock className="w-4 h-4" />
-        <p>Privacy Note: Your data is confidential and secured by HIPAA and GDPR standards.</p>
+        <p>
+          Privacy Note: Your data is confidential and secured by HIPAA and GDPR
+          standards.
+        </p>
       </div>
       <div className="flex max-w-sm mx-auto gap-3">
-        <Button className="w-full bg-teal-600 hover:bg-teal-700" onClick={onStart}>
-          Start
-        </Button>
+        {isSubmit ? (
+          <Button
+            disabled={isSubmit}
+            className="w-full bg-teal-600 hover:bg-teal-700"
+            onClick={onStart}
+          >
+            <Loader2 className="animate-spin" />
+            Start
+          </Button>
+        ) : (
+          <Button
+            className="w-full bg-teal-600 hover:bg-teal-700"
+            onClick={onStart}
+          >
+            Start
+          </Button>
+        )}
       </div>
     </div>
-  )
+  );
 }

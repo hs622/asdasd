@@ -43,9 +43,9 @@ const NavMain = () => {
     },
     {
       title: "Settings",
-      url: "/healthboard/setting",
+      url: "/healthboard/settings/profile",
       icon: Settings2,
-      isActive: pathname.toLowerCase() === "/healthboard/setting",
+      isActive: pathname.toLowerCase() === "/healthboard/settings/profile",
     },
   ];
 
