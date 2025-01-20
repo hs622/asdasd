@@ -44,14 +44,23 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  firstName     String    @db.String
-  lastName      String?   @db.String
-  email         String?   @unique
-  emailVerified Boolean   @default(false)
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
+  id                   String              @id @default(auto()) @map("_id") @db.ObjectId
+  firstName            String              @db.String
+  lastName             String?             @db.String
+  nickName             String?
+  email                String?             @unique
+  emailVerified        Boolean             @default(false)
+  image                String?
+  accounts             Account[]
+  sessions             Session[]
+  isAdult              Boolean?
+  address              Address?
+  generalInformation   GeneralInformation? @relation("UserToGeneralInformation")
+  generalInformationId String?             @db.ObjectId
+  healthInformation    HealthInformation?  @relation("UserToHealthInformation")
+  healthInformationId  String?             @db.ObjectId
+
+  // healthInfo    HealthInformation
 
   password  String?  @db.String
   role      String   @db.String
@@ -72,11 +81,33 @@ model VerificationToken {
   @@map("verification_tokens")
 }
 
-// model Profile {
-//   id     String    @id @default(auto()) @map("_id") @db.ObjectId
-//   user   User      @relation(fields: [userId], references: [id])
-//   userId String    @db.ObjectId
-//   dob    DateTime? @db.Date
+type Address {
+  street  String?
+  city    String?
+  state   String?
+  zip     String?
+  country String?
+}
 
-//   @@map("profiles")
-// }
+model GeneralInformation {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  user              User    @relation(fields: [userId], references: [id], name: "UserToGeneralInformation")
+  userId            String  @unique @db.ObjectId
+  age               Int?
+  gender            String?
+  measurementSystem String?
+  ethnicity         String?
+  weight            Int?
+  height            Int?
+  heightInches      Int?
+
+  @@map("general_information")
+}
+
+model HealthInformation {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  User   User   @relation(fields: [userId], references: [id], name: "UserToHealthInformation")
+  userId String @unique @db.ObjectId
+
+  @@map("health_information")
+}
